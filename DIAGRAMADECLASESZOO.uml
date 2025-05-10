@@ -1,0 +1,82 @@
+@startuml DER_Zoologico
+
+class Zona {
+  +id_zona: 
+  nombre: 
+  descripcion: 
+}
+
+class Habitat {
+  +id_habitat: 
+  nombre: 
+  tipo: 
+  capacidad: 
+}
+
+class Especie {
+  +id_especie: 
+  nombre_cientifico: 
+  nombre_comun: 
+  dieta: 
+}
+
+class Animal {
+  +id_animal: 
+  nombre: 
+  edad: 
+  sexo: 
+}
+
+class ExamenMedico {
+  +id_examen: 
+  fecha: date
+  resultado: 
+}
+
+class Cuidador {
+  +id_cuidador: 
+  nombre: 
+  especialidad: 
+}
+
+class Guia {
+  +id_guia: 
+  nombre: 
+  idioma: 
+}
+
+class Itinerario {
+  +id_itinerario: 
+  nombre: 
+  duracion_min: 
+}
+
+class Detalle_Itinerario {
+  +id_itinerario: 
+  +id_guia: 
+}
+
+class Cuidado {
+  +id_animal: 
+  +id_cuidador: 
+}
+
+class Zona_Itinerario {
+  +id_zona: 
+  +id_itinerario: 
+}
+
+Zona "1" --> "*" Habitat : contiene
+Habitat "1" --> "*" Especie : alberga
+Especie "1" --> "*" Animal : incluye
+Animal "1" --> "*" ExamenMedico : tiene
+Animal "1" --> "*" Cuidado
+Cuidador "1" --> "*" Cuidado
+
+Itinerario "1" --> "*" Detalle_Itinerario
+Guia "1" --> "*" Detalle_Itinerario
+
+Itinerario "1" --> "*" Zona_Itinerario
+Zona "1" --> "*" Zona_Itinerario
+
+@enduml
